@@ -7,15 +7,13 @@ from django.contrib.auth.models import AbstractUser
 class Libro(models.Model):
     titulo = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=200)
-    portada = models.CharField(max_length=200)
+    portada = models.ImageField(upload_to='portadas/', null=True, blank=True)
     resumen = models.CharField(max_length=500)
     disponibilidad = models.CharField(default=True, max_length=10)
     genero = models.CharField(max_length=200)
-    fechaPublicacion= models.DateField()    
-    
-    
-    
-    
+    fechaPublicacion= models.DateField()
+      
+        
 class Editorial(models.Model):
     idEditorial = models.CharField(max_length=200)
     nombre = models.CharField(max_length=200)
@@ -38,5 +36,6 @@ class Usuario(AbstractUser):
 class Autor(models.Model):
     idAutor = models.CharField(max_length=20)
     direccion = models.CharField(max_length=200)
-    sitioWeb = models.CharField(max_length=200)         
+    sitioWeb = models.CharField(max_length=200)
+   # imagenAutor = models.ImageField(upload_to='autores/', null=True, blank=True)         
        
