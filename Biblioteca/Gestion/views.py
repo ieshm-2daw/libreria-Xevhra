@@ -54,7 +54,7 @@ class UpdateBookView(UpdateView):
     model = Libro
     template_name = 'libros/editar_Libro.html'
     fields = ['titulo', 'ISBN', 'portada', 'resumen',
-              'disponibilidad', 'genero', 'fechaPublicacion']
+              'disponibilidad', 'genero', 'rating', 'fechaPublicacion']
     success_url = reverse_lazy('listadoLibros')
     
 
@@ -62,7 +62,7 @@ class CreateBookView(CreateView):
     model = Libro
     template_name = 'libros/Create_Libro.html'
     fields = ['titulo', 'ISBN', 'portada', 'resumen',
-              'disponibilidad', 'genero', 'fechaPublicacion'] 
+              'disponibilidad', 'genero', 'rating', 'fechaPublicacion'] 
     success_url = reverse_lazy('listadoLibros')
     
 class DeleteBookView(DeleteView):

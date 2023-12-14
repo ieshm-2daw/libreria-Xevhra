@@ -4,16 +4,15 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-CHOICES_DISPONIBILIDAD = (('disponible', 'disponible'),
-                          ('DISPONIBLE','DISPONIBLE'),
-                          ('no disponible','no disponible'),
-                          ('NO DISPONIBLE', 'NO DISPONIBLE'))  
+CHOICES_DISPONIBILIDAD = (('disponible', 'disponible'),           
+                          ('no disponible','no disponible'))  
 
 class Libro(models.Model):
     titulo = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=200)
     portada = models.ImageField(upload_to='portadas/', null=True, blank=True)
     resumen = models.CharField(max_length=500)
+    rating = models.CharField(max_length=1)
     disponibilidad = models.CharField(default=True, max_length=20, choices=CHOICES_DISPONIBILIDAD)
     genero = models.CharField(max_length=200)
     fechaPublicacion= models.DateField()

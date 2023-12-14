@@ -10,6 +10,7 @@
   <body>
     <p><a href="{% url 'create_libro'%}">Crear Libro</a></p>
     <p><a href="{% url 'listadoLibros' %}">Lista de Libros</a></p>
+    <p><a href="{% url 'librosPrestados' %}">Mis Libros</a></p>
 
     {% block content %}
     <h1>{{ libro.titulo }}</h1>
