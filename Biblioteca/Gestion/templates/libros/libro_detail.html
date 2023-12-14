@@ -1,19 +1,27 @@
 <html>
-<head>
+  <head>
     <title>Detalles del Libro</title>
-</head>
-<body>
-    
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"
+      &gt;
+    />
+  </head>
+  <body>
+    <p><a href="{% url 'create_libro'%}">Crear Libro</a></p>
+    <p><a href="{% url 'listadoLibros' %}">Lista de Libros</a></p>
+
     {% block content %}
-        <h1>{{ libro.titulo }}</h1>
-        <p> Resumen: {{ libro.resumen }}
-        <p>Publicado: {{ libro.fechaPublicacion }}</p>
-    
+    <h1>{{ libro.titulo }}</h1>
+    <p>Resumen: {{ libro.resumen }}</p>
+    <p>Publicado: {{ libro.fechaPublicacion }}</p>
+    <p>Rating: {{libro.rating}}</p>
+    <p>Portada:</p>
+    <img src="{{libro.portada}}" />
+
     {% endblock %}
 
-    <p><a href="{% url 'listadoLibros' %}">Ver libros</a></p>
     <p><a href="{% url 'editar_libro' libro.pk %}">Editar</a></p>
     <p><a href="{% url 'borrar_libro' libro.pk %}">Borrar</a></p>
-    
-</body>
+  </body>
 </html>

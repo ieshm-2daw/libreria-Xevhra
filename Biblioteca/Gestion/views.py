@@ -32,6 +32,18 @@ class ListLibro (ListView):
         
         return context
     
+    
+class ListLibroPrestados (ListView):
+    model = Libro
+    template_name = 'libros/libros_prestados.html'
+    
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["libros_prestados"] = Libro.objects.filter(
+            disponibilidad = 'no disponible')
+        
+        return context    
+    
 
 class DetailBookView(DetailView):
     model = Libro

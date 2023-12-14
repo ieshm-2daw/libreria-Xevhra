@@ -8,17 +8,6 @@
     />
   </head>
   <body>
-    <h1>Lista de Libros</h1>
-    <h2>Lista de Libros disponibles</h2>
-    <ul>
-      {% for libro in libros_disponibles %}
-      <li>
-        <a href="{% url 'detalle_libro' pk=libro.pk %}">{{ libro.titulo }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-    <p><a href="{% url 'create_libro'%}">Nuevo Libro</a></p>
-
     <h2>Lista de Libros prestados</h2>
     <ul>
       {% for libro in libros_prestados %}
