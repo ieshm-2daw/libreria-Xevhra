@@ -5,8 +5,8 @@ from .views import ListLibro, DetailBookView, UpdateBookView, CreateBookView, De
 urlpatterns = [
     path('', ListLibro.as_view(), name='listadoLibros'),
     path('libros/prestados', ListLibroPrestados.as_view(), name='librosPrestados'),
-    path('libros/reservados', ListLibroReservados.as_view(), name='librosReservados'),
-    path('marcar_reservado/<int:libro_id>/', marcar_como_reservado, name='marcar_como_reservado'),
+    path('libros/reservados/', ListLibroReservados.as_view(), name='librosReservados'),
+    
     path('libros/<int:pk>/', DetailBookView.as_view(), name='detalle_libro'),
     path('libros/editar/<int:pk>/', UpdateBookView.as_view(), name='editar_libro'),
     path('libros/nuevo/', CreateBookView.as_view(), name='create_libro'),
