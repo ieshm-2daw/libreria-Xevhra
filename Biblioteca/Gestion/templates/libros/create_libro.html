@@ -8,7 +8,11 @@
     />
   </head>
   <body>
-    <form method="post" action="{% url 'create_libro' %}">
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      action="{% url 'create_libro' %}"
+    >
       {% csrf_token %} {{ form.as_p }}
       <input type="submit" value="Enviar" />
     </form>

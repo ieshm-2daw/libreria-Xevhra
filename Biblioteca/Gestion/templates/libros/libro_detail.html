@@ -18,11 +18,23 @@
     <p>Publicado: {{ libro.fechaPublicacion }}</p>
     <p>Rating: {{libro.rating}}</p>
     <p>Portada:</p>
-    <img src="{{libro.portada}}" />
+    <img src="{{libro.portada.url}}" />
 
     {% endblock %}
 
     <p><a href="{% url 'editar_libro' libro.pk %}">Editar</a></p>
     <p><a href="{% url 'borrar_libro' libro.pk %}">Borrar</a></p>
+
+    {% if libro.disponibilidad == 'disponible' %}
+    <form action="{% url 'marcar_como_reservado' libro.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Reservar</button>
+    </form>
+    {% else %}
+    <form>
+      {% csrf_token %}
+      <button type="submit">No disponible</button>
+    </form>
+    {% endif %}
   </body>
 </html>

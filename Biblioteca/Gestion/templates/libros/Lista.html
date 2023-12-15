@@ -27,5 +27,14 @@
       </li>
       {% endfor %}
     </ul>
+
+    <h2>Mis Reservas</h2>
+    <ul>
+      {% for libro in libros_reservados %}
+      <li>
+        <a href="{% url 'detalle_libro' pk=libro.pk %}">{{ libro.titulo }}</a>
+      </li>
+      {% endfor %}
+    </ul>
   </body>
 </html>

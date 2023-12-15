@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404, redirect
+from django.shortcuts import render, get_list_or_404, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
@@ -42,7 +42,26 @@ class ListLibroPrestados (ListView):
         context["libros_prestados"] = Libro.objects.filter(
             disponibilidad = 'no disponible')
         
-        return context    
+        return context
+    
+class ListLibroReservados (ListView):
+    model = Libro
+    template_name = 'libros/libros_reservados.html'
+    
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["libros_reservados"] = Libro.objects.filter(
+            disponibilidad = 'reservado')
+        
+        return context
+    
+    
+# Aqui añadimos la función que controla la secuencia
+
+def marcar_como_reservado(request, libro_id):
+    libro = get_object_or_404(Libro, id=libro_id)
+    libro.marcar_como_reservado()
+    return redirect('detalle_libro', libro_id=libro_id)               
     
 
 class DetailBookView(DetailView):
