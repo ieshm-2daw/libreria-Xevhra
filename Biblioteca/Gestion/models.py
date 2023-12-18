@@ -4,9 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-CHOICES_DISPONIBILIDAD = (('disponible', 'disponible'),           
-                          ('no disponible','no disponible'),
-                          ('reservado', 'reservado'))  
+ 
 
 class Libro(models.Model):
     titulo = models.CharField(max_length=200)
@@ -14,7 +12,13 @@ class Libro(models.Model):
     portada = models.ImageField(upload_to='portadas/', null=True, blank=True)
     resumen = models.CharField(max_length=500)
     rating = models.CharField(max_length=1)
-    disponibilidad = models.CharField(default=True, max_length=20, choices=CHOICES_DISPONIBILIDAD)
+    
+    CHOICES_DISPONIBILIDAD = (('disponible', 'disponible'),           
+                          ('no disponible','no disponible'),
+                          ('reservado', 'reservado')) 
+    
+    
+    disponibilidad = models.CharField(max_length=20, choices=CHOICES_DISPONIBILIDAD, default='disponible')
     genero = models.CharField(max_length=200)
     fechaPublicacion= models.DateField()
     def marcar_como_reservado(self):

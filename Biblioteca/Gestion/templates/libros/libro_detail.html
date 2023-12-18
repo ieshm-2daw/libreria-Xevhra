@@ -20,7 +20,14 @@
     <p>Portada:</p>
     <img src="{{libro.portada.url}}" />
 
-    {% endblock %}
+    {% if libro.disponibilidad == 'disponible' %}
+    <form method="post" action="{% url 'marcar_reservado' libro.pk %}">
+      {% csrf_token %}
+      <button type="submit">Reservar Libro</button>
+    </form>
+    {% else %}
+    <p>Este libro no está disponible para reservar.</p>
+    {% endif %} {% endblock %}
 
     <p><a href="{% url 'editar_libro' libro.pk %}">Editar</a></p>
     <p><a href="{% url 'borrar_libro' libro.pk %}">Borrar</a></p>

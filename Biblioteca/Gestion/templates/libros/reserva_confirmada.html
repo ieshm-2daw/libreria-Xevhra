@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Confirmación de Reservación</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"
+    />
+  </head>
+  <body>
+    <h1>Reserva confirmada</h1>
+    <p>Has reservado el libro "{{ libro.titulo }}" con éxito.</p>
+    <p>¡Gracias por tu reserva!</p>
+    <p><a href="{% url 'listadoLibros' %}">Volver a la Lista de Libros</a></p>
+  </body>
+</html>

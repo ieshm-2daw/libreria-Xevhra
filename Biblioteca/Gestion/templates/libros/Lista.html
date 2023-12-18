@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Lista de Libros</title>
+    {% load static %}
     <link
       rel="stylesheet"
       href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"
@@ -9,7 +10,7 @@
   </head>
   <body>
     <h1>Lista de Libros</h1>
-    <h2>Lista de Libros disponibles</h2>
+    <h2>Libros Disponibles</h2>
     <ul>
       {% for libro in libros_disponibles %}
       <li>
@@ -19,7 +20,7 @@
     </ul>
     <p><a href="{% url 'create_libro'%}">Nuevo Libro</a></p>
 
-    <h2>Lista de Libros prestados</h2>
+    <h2>Libros Prestados</h2>
     <ul>
       {% for libro in libros_prestados %}
       <li>
@@ -28,7 +29,7 @@
       {% endfor %}
     </ul>
 
-    <h2>Mis Reservas</h2>
+    <h2>Lista de Libros reservados</h2>
     <ul>
       {% for libro in libros_reservados %}
       <li>

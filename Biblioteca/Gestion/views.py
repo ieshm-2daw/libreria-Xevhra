@@ -29,6 +29,8 @@ class ListLibro (ListView):
             disponibilidad = 'disponible')
         context["libros_prestados"] = Libro.objects.filter(
             disponibilidad = 'no disponible')
+        context["libros_reservados"] = Libro.objects.filter(
+            disponibilidad = 'reservado')
         
         return context
     
@@ -44,25 +46,38 @@ class ListLibroPrestados (ListView):
         
         return context
     
-class ListLibroReservados (ListView):
+class ListLibroReservados(ListView):
     model = Libro
     template_name = 'libros/libros_reservados.html'
-    
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["libros_reservados"] = Libro.objects.filter(
-            disponibilidad = 'reservado')
-        
-        return context
-    
-    
-# Aqui añadimos la función que controla la secuencia
+    context_object_name = 'libros_reservados'
 
-def marcar_como_reservado(request, libro_id):
-    libro = get_object_or_404(Libro, id=libro_id)
-    libro.marcar_como_reservado()
-    return redirect('detalle_libro', libro_id=libro_id)               
+
+    # Aquí obtienes los Libros
+    def get_queryset(self):
+        queryset = Libro.objects.filter(disponibilidad='reservado')
+        return queryset
+
+    # Aquí los estas filtrando, como arriba
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["libros_disponibles"] = Libro.objects.filter(disponibilidad='disponible')
+        context["libros_prestados"] = Libro.objects.filter(disponibilidad='no disponible')
+        return context           
+
+class MarcarReservadoView(View):
+    def post(self, request, pk):
+        libro = get_object_or_404(Libro, pk=pk)
+        libro.marcar_como_reservado()
+        return redirect('confirmar_reserva', pk=libro.pk)
     
+    
+class ConfirmarReservaView(View):
+    def get(self, request, pk):
+        # Aquí obtenemos el libro reservado
+        libro = get_object_or_404(Libro, pk=pk)
+
+        # Renderizar la página de confirmación con el libro
+        return render(request, 'libros/reserva_confirmada.html', {'libro': libro})       
 
 class DetailBookView(DetailView):
     model = Libro
@@ -83,6 +98,12 @@ class CreateBookView(CreateView):
     fields = ['titulo', 'ISBN', 'portada', 'resumen',
               'disponibilidad', 'genero', 'rating', 'fechaPublicacion'] 
     success_url = reverse_lazy('listadoLibros')
+    
+    def form_valid(self, form):
+        # Antes de guardar el formulario, marca el libro como reservado
+        libro = form.save(commit=False)
+        libro.marcar_como_reservado()
+        return super().form_valid(form)
     
 class DeleteBookView(DeleteView):
     model = Libro

@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Lista de Libros</title>
+    {% load static %}
     <link
       rel="stylesheet"
       href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"
@@ -10,7 +11,7 @@
   <body>
     <h2>Lista de Libros reservados</h2>
     <ul>
-      {% for libro in librosReservados %}
+      {% for libro in libros_reservados %}
       <li>
         <a href="{% url 'detalle_libro' pk=libro.pk %}">{{ libro.titulo }}</a>
       </li>
