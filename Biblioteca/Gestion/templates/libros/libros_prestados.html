@@ -8,7 +8,7 @@
     />
   </head>
   <body>
-    <h2>Lista de Libros reservados</h2>
+    <h2>Lista de Libros prestados</h2>
     <ul>
       {% for libro in libros_prestados %}
       <li>
@@ -16,5 +16,7 @@
       </li>
       {% endfor %}
     </ul>
+
+    <p><a href="{% url 'listadoLibros' %}">Volver</a></p>
   </body>
 </html>

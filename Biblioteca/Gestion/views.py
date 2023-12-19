@@ -75,7 +75,6 @@ class ConfirmarReservaView(View):
     def get(self, request, pk):
         # Aquí obtenemos el libro reservado
         libro = get_object_or_404(Libro, pk=pk)
-
         # Renderizar la página de confirmación con el libro
         return render(request, 'libros/reserva_confirmada.html', {'libro': libro})       
 
