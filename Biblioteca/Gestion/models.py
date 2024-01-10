@@ -42,7 +42,7 @@ class Usuario(AbstractUser):
     telefono = models.CharField(max_length=9)
     
     def __str__(self):
-        return str(self.dni)
+        return str(self.username)
     
 class Autor(models.Model):
     idAutor = models.CharField(max_length=20)

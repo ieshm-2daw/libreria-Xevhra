@@ -9,6 +9,8 @@
     />
   </head>
   <body>
+    <a href="{% url 'login' %}">Iniciar sesión</a>
+    <a href="{% url 'logout' %}">Cerrar sesión</a>
     <h1>Lista de Libros</h1>
     <h2>Libros Disponibles</h2>
     <ul>
@@ -37,5 +39,17 @@
       </li>
       {% endfor %}
     </ul>
+
+    {% if page_obj.has_previous %}
+    <a
+      href="{% url 'listadoLibros' %}?page={{ page_obj.previous_page_number }}"
+    >
+      Ir a página {{ page_obj.previous_page_number}}
+    </a>
+    {% endif %} La pagina actual es {{ page_obj.number}} {% if page_obj.has_next
+    %}
+    <a href="{% url 'listadoLibros' %}?page={{ page_obj.next_page_number }}">
+      Ir a página {{ page_obj.next_page_number }}
+    </a>
   </body>
 </html>

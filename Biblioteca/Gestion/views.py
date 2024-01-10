@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, UpdateView, CreateView, D
 from django.views import View
 from typing import Any
 from .models import Libro, Editorial, Autor, Prestamo, Usuario
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -22,6 +23,8 @@ from .models import Libro, Editorial, Autor, Prestamo, Usuario
 class ListLibro (ListView):
     model = Libro
     template_name = 'libros/Lista.html'
+    paginate_by = 2
+    
     
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -91,7 +94,7 @@ class UpdateBookView(UpdateView):
     success_url = reverse_lazy('listadoLibros')
     
 
-class CreateBookView(CreateView):
+class CreateBookView(LoginRequiredMixin, CreateView):
     model = Libro
     template_name = 'libros/Create_Libro.html'
     fields = ['titulo', 'ISBN', 'portada', 'resumen',
